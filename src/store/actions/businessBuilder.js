@@ -1,9 +1,22 @@
 import * as actionTypes from './actionsTypes';
 
 export const addBusiness = (data) => {
-	return {
-		type: actionTypes.ADD_BUSINESS,
-		data: data
+
+	return (dispatch, getState, {getFirebase, getFirestore }) => {
+		const firestore = getFirestore();
+		firestore.collection('activitiesData').add({
+			title: data.title,
+			goal: data.goalHours,
+			totalHours: data.totalHours,
+			progress: data.progress,
+			currentStopwatchTime: data.currentStopwatchTime,
+		}).then(()=>{
+			dispatch({type: actionTypes.ADD_BUSINESS, data: data})
+			
+		}).catch((err)=>{
+			console.log('error');
+			// dispatch error
+		})	
 	}
 }
 

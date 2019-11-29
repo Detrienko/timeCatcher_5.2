@@ -348,6 +348,11 @@ const reducer = (state=initialState, action) => {
 
 			return newState13;
 
+			case 'TEST_REQ':
+			console.log('database test');
+			console.log(action.data)
+			return state
+
 		default:
 		return state; 
 	}

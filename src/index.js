@@ -2,20 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import businessListReducer from './store/reducers/businessList';
+import rootReducer from './store/reducers/rootReducer';
 
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-	
-const rootReducer = combineReducers({
-	businessList: businessListReducer,
-})
+import thunk from 'redux-thunk';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';	
+import fbConfig from './config/fbConfig';
 
-const store = createStore(rootReducer, composeEnhancers(
-	applyMiddleware()
-	))
+const middlewares = [
+	thunk.withExtraArgument({getFirebase, getFirestore})
+]
+
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, 
+	compose(
+		applyMiddleware(...middlewares),
+		// reactReduxFirebase(fbConfig), doesn't work //////////////////!!!!!!!!!
+   		reduxFirestore(fbConfig),
+	)
+)
 
 const app = (
 	<Provider store={store}>

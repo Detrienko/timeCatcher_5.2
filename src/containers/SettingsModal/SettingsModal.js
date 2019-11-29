@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classes from './settingsModal.module.css';
 
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/businessBuilder';
+import * as businessBuilderActions from '../../store/actions/businessBuilder';
+import * as projectActions from '../../store/actions/projectActions';
 
 
 class SettingsModal extends Component {
@@ -16,6 +17,7 @@ class SettingsModal extends Component {
 	}
 
 	showRemovePopUp = () => {
+    this.props.testReq('hi from fronetnd');
 		document.getElementById('popUpContainer').style.display="block";
 	}
 
@@ -66,7 +68,8 @@ class SettingsModal extends Component {
 
 const mapDispatchToProps = dispatch => {
     return{
-      deleteBusiness: (id) => dispatch(actions.deleteBusiness(id)),	
+      deleteBusiness: (id) => dispatch(businessBuilderActions.deleteBusiness(id)),
+      testReq: (data) => dispatch(projectActions.testReq(data))
     }
   }
 

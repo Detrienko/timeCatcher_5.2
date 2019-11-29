@@ -22,8 +22,6 @@ export const INCREASE_TIMER = 'INCREASE_TIMER';
 export const UPDATE_STOPWATCH = 'UPDATE_STOPWATCH';
 export const CLEAR_STOPWATCH = 'CLEAR_STOPWATCH';
 
-
-
 export const SAVE_TIMER_ID = 'SAVE_TIMER_ID';
 
 

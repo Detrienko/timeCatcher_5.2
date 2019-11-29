@@ -3,6 +3,9 @@ import classes from './BusinessForm.module.css';
 import Button from "../../../components/Button/Button";
 import { connect } from 'react-redux';
 
+import { firestoreConnect } from 'react-redux-firebase'; 
+import { compose } from 'redux';
+
 class BusinessForm extends Component {
 
   state = {
@@ -140,6 +143,7 @@ class BusinessForm extends Component {
 }
 
   const mapStateToProps = state => {
+    console.log(state)
     return {
       business: state.businessList.business,
     }
